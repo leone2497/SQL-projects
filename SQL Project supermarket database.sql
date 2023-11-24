@@ -1,3 +1,7 @@
+-- Database downloaded by kaggle. The dataset is one of the historical sales of supermarket company which has recorded in 3 different branches for 3 months data. Predictive data analytics methods are easy to apply with this dataset.# SQL-projects Code written in MYSQL environment
+
+
+
 -- we want to see the sum of total income for branch, city and gender in desc order
 SELECT City, Branch, Gender, sum(gross_income) as Sum_income  FROM new_schema.`supermarket_sales - sheet1` GROUP BY City, Branch, Gender order by sum_income desc;
 -- count how many rows for city do you have in your database
