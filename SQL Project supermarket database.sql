@@ -31,3 +31,24 @@ FROM
     PaymentCounts
 WHERE
     Indice = 1;
+-- the most sold product by city and gender
+with bestseller as 
+(SELECT
+        City,
+        gender,
+        product_line,
+        sum(quantity) as sum_quantity,
+		ROW_NUMBER() OVER (PARTITION by City, gender  ORDER BY sum(quantity) DESC) AS indice
+    FROM
+        new_schema.`supermarket_sales - sheet1`
+    group by
+        city,
+        gender,
+        product_line)
+	select
+        City,
+        gender,
+        product_line,
+        indice
+	from bestseller
+    where indice= 1;
