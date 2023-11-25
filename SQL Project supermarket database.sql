@@ -60,7 +60,7 @@ with last_sold as
         gender,
         product_line,
         date_time,
-		ROW_NUMBER() OVER (PARTITION by City, gender, product_line  ORDER BY date_time DESC) AS indice
+		ROW_NUMBER() OVER (PARTITION by City, gender  ORDER BY date_time DESC) AS indice
     FROM
         new_schema.`supermarket_sales - sheet1`
     group by
