@@ -52,3 +52,23 @@ with bestseller as
         indice
 	from bestseller
     where indice= 1;
+
+-- select last product sold by city, gender
+with last_sold as 
+(SELECT
+        City,
+        gender,
+        product_line,
+        date_time,
+		ROW_NUMBER() OVER (PARTITION by City, gender, product_line  ORDER BY date_time DESC) AS indice
+    FROM
+        new_schema.`supermarket_sales - sheet1`
+    group by
+        city,
+        gender,
+        product_line,
+        date_time)
+select
+city, gender, product_line, date_time, indice
+from last_sold 
+where indice= 1
